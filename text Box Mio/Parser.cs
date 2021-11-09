@@ -554,14 +554,14 @@ namespace at.jku.ssw.cc
                                        //o Para la vbe Global val
                                        //o para x en int x;
             MessageBoxCon3Preg();//agregado 
+            Code.Colorear("latoken");
+            MessageBoxCon3Preg();//agregado 
             Code.seleccLaProdEnLaGram(7);
            // MessageBoxCon3Preg();//agregado 
            //ya tiene un msbbox dentro
             Identifieropc(hijo2, type, kind);
             MessageBoxCon3Preg();//agregado 
-            Code.Colorear("latoken"); 
             Check(Token.SEMICOLON);
-            MessageBoxCon3Preg();
             Code.seleccLaProdEnLaGram(6);
             MessageBoxCon3Preg();//agregado 
             Code.Colorear("token");//deberia pintar rojo ';' pero ya esta pintado verde
@@ -641,15 +641,15 @@ namespace at.jku.ssw.cc
             {
                 if (la == Token.VOID)
                 {
-                    Code.Colorear("latoken");
-                    Check(Token.VOID); //token = void laToken = Main
-                    ///// Agrega 'MethodDecl' al arbol y lo cuelga de MethodDeclsOpc
                     methodDeclsopc.Nodes.Add(methodDecl);
                     methodDeclsopc.ExpandAll();
                     MessageBoxCon3Preg();
                     Code.seleccLaProdEnLaGram(8);
                     MessageBoxCon3Preg();
-
+                    Code.Colorear("latoken");
+                    Check(Token.VOID); //token = void laToken = Main
+                    ///// Agrega 'MethodDecl' al arbol y lo cuelga de MethodDeclsOpc
+                    MessageBoxCon3Preg();
                     ///// Agrega 'TypeOrVoid' al arbol y lo cuelga de MethodDecl
                     methodDecl.Nodes.Add(typeOrVoid);
                     methodDecl.ExpandAll();
@@ -663,8 +663,7 @@ namespace at.jku.ssw.cc
                     Code.seleccLaProdEnLaGram(8);
                     type = Tab.noType; //  para void
                 }
-                else
-                    if (la == Token.IDENT)
+                else if (la == Token.IDENT)
                     {
                         Type(out type);  //  token = UnTipo laToken = Main
                         Code.Colorear("token");
@@ -686,7 +685,7 @@ namespace at.jku.ssw.cc
              
                 curMethod = Tab.Insert(Symbol.Kinds.Meth, token.str, type);//inserta void Main 
                 Tab.OpenScope(curMethod);
-                MessageBoxCon3Preg();
+               // MessageBoxCon3Preg();
                 methodDecl.Nodes.Add("'('");
                 MessageBoxCon3Preg();
                 Check(Token.LPAR);  //Si Main() => no tiene FormPars
